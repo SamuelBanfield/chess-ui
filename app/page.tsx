@@ -1,34 +1,20 @@
-import Image from "next/image";
+"use client";
+
+import Board from "./_components/board";
+import Games from "./_components/games";
+import { Chess } from 'chess.js';
+import { useState } from "react";
 
 export default function Home() {
 
-  const board = [
-    "bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR",
-    "bP", "bP", "bP", "bP", "bP", "bP", "bP", "bP",
-    "", "", "", "", "", "", "", "",
-    "", "", "", "", "", "", "", "",
-    "", "", "", "", "", "", "", "",
-    "", "", "", "", "", "", "", "",
-    "wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP",
-    "wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"
-  ];
-
+  const [game, setGame] = useState(new Chess());
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <div className="grid grid-cols-8">
-          {board.map((piece, index: number) => (
-            <div
-              key={index}
-              className={`${(Math.floor(index / 8) + index) % 2 === 0 ? "bg-white" : "bg-gray"} piece ${piece ? "" : "empty-square"}`}
-              style={{ width: "60px", height: "60px" }}
-            >
-              {piece && <Image src={`/pieces/${piece}.svg`} alt={piece} width={60} height={60} />}
-            </div>
-          ))}
-        </div>
-      </div>
+
+    <main className="flex justify-center p-24">
+      <Board game={game} setGame={setGame} />
+      <Games />
+      
     </main>
   );
 }
