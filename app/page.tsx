@@ -13,8 +13,7 @@ export default function Home() {
 
     <main className="flex justify-center p-24">
       <Board game={game} setGame={setGame} />
-      <Games game={game} />
-      
+      <Games game={game} setGame={setGame} />
     </main>
   );
 }

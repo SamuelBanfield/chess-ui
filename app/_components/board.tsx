@@ -1,15 +1,14 @@
 "use client";
 
 import { Chess } from "chess.js";
-import { Chessboard, ChessboardDnDProvider } from "react-chessboard";
+import { Chessboard } from "react-chessboard";
 
 export default function Board({ game, setGame }) {
 
   return (
-    <ChessboardDnDProvider>
+    <div className="w-2/3" >
       <Chessboard
         position={game.fen()}
-        boardWidth={640}
         onPieceDrop={(sourceSquare, targetSquare, piece) => {
           console.log("Attempting to move", piece, "from", sourceSquare, "to", targetSquare, "p");
           try {
@@ -28,8 +27,7 @@ export default function Board({ game, setGame }) {
           }
         }}
       />
-
-    </ChessboardDnDProvider>
+    </div>
   );
 
 }
