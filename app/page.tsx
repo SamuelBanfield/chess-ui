@@ -1,8 +1,8 @@
 "use client";
 
 import Board from "./_components/board";
-import Games from "./_components/games";
 import { useEffect, useState } from "react";
+import InfoPanel from "./_components/infoPanel";
 
 const startingFEN : string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main className="flex justify-center p-24">
       <Board positionStack={positionStack} setPositionStack={setPositionStack} />
-      <Games positionStack={positionStack} setPositionStack={setPositionStack} />
+      <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
     </main>
   );
 }

@@ -41,18 +41,18 @@ export default function Games({ positionStack, setPositionStack } : GameProps) {
   }, [positionStack]);
 
   return (
-      <div className="w-screen/3">
-          <h1>Games</h1>
-          {gamesBar
-              ?.sort((a: MoveWithFrequency, b: MoveWithFrequency) => totalGames(b) - totalGames(a))
-              .map((move: MoveWithFrequency, index: any) => (
-                  <div
-                      key={index}
-                      onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
-                      className="border w-48 py-2 bg-gray-200 hover:bg-gray-400 text-center mx-auto max-w-400">
-                      {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
-                  </div>
-              ))}
-      </div>
+    <div className="w-screen/3">
+      {gamesBar
+        ?.sort((a: MoveWithFrequency, b: MoveWithFrequency) => totalGames(b) - totalGames(a))
+        .map((move: MoveWithFrequency, index: any) => (
+          <div
+            key={index}
+            onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
+            className="border w-48 py-2 bg-gray-200 hover:bg-gray-400 text-center mx-auto max-w-400">
+            {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
+          </div>
+        ))
+      }
+    </div>
   );
 }
