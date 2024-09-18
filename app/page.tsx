@@ -2,18 +2,34 @@
 
 import Board from "./_components/board";
 import Games from "./_components/games";
-import { Chess } from 'chess.js';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const startingFEN : string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 export default function Home() {
 
-  const [game, setGame] = useState(new Chess());
+  const [positionStack, setPositionStack] = useState([startingFEN]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        if (positionStack.length > 1) {
+          setPositionStack(positionStack.slice(0, positionStack.length - 1));
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [positionStack]);
 
   return (
-
     <main className="flex justify-center p-24">
-      <Board game={game} setGame={setGame} />
-      <Games game={game} setGame={setGame} />
+      <Board positionStack={positionStack} setPositionStack={setPositionStack} />
+      <Games positionStack={positionStack} setPositionStack={setPositionStack} />
     </main>
   );
 }

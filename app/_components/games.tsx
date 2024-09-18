@@ -14,24 +14,23 @@ type MoveWithFrequency = {
 };
 
 type GameProps = {
-  game: Chess;
-  setGame: (game: Chess) => void;
+  positionStack: string[];
+  setPositionStack: (positionStack: string[]) => void;
 };
 
 const totalGames = (moveWithFrequency: MoveWithFrequency) => {
   return moveWithFrequency.whiteWins + moveWithFrequency.blackWins + moveWithFrequency.draws;
 }
 
-export default function Games({ game, setGame } : GameProps) {
+export default function Games({ positionStack, setPositionStack } : GameProps) {
 
   const [gamesBar, setGamesBar] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/games?fen=${encodeURIComponent(game.fen())}`);
+        const response = await fetch(`/api/games?fen=${encodeURIComponent(positionStack[positionStack.length - 1])}`);
         const data = await response.json();
-        console.log(data); // Process the fetched data here
         setGamesBar(data);
       } 
       catch (error) {
@@ -39,7 +38,7 @@ export default function Games({ game, setGame } : GameProps) {
       }
     };
     fetchData();
-  }, [game]);
+  }, [positionStack]);
 
   return (
       <div className="w-screen/3">
@@ -49,7 +48,7 @@ export default function Games({ game, setGame } : GameProps) {
               .map((move: MoveWithFrequency, index: any) => (
                   <div
                       key={index}
-                      onClick={() => setGame(new Chess(move.move.endingFEN))}
+                      onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
                       className="border w-48 py-2 bg-gray-200 hover:bg-gray-400 text-center mx-auto max-w-400">
                       {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
                   </div>
