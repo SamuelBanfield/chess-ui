@@ -1,7 +1,6 @@
 "use client";
 
 import { Chess } from "chess.js";
-import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 
 type GameProps = {
@@ -10,8 +9,6 @@ type GameProps = {
 };
 
 export default function Board({ positionStack, setPositionStack }: GameProps) {
-
-  const [game, setGame] = useState(new Chess());
 
   return (
     <div className="w-2/3" >

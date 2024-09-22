@@ -29,9 +29,18 @@ export default function Games({ positionStack, setPositionStack } : GameProps) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/games?fen=${encodeURIComponent(positionStack[positionStack.length - 1])}`);
-        const data = await response.json();
-        setGamesBar(data);
+        const params = new URLSearchParams();
+        params.append('fen', positionStack[positionStack.length - 1]);
+        params.append('colour', 'white');
+        params.append('sources', 'MilkyGerm@chessdotcom')
+        const url = `/api/game?${params.toString()}`;
+        
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          setGamesBar(data);
+        }
+
       } 
       catch (error) {
         console.error('Error:', error);
@@ -48,7 +57,7 @@ export default function Games({ positionStack, setPositionStack } : GameProps) {
           <div
             key={index}
             onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
-            className="border w-48 py-2 bg-gray-200 hover:bg-gray-400 text-center mx-auto max-w-400">
+            className="border w-48 bg-gray-200 hover:bg-gray-400 text-center mx-auto max-w-400">
             {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
           </div>
         ))
