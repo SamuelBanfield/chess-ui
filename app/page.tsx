@@ -28,8 +28,12 @@ export default function Home() {
 
   return (
     <main className="flex justify-center p-24">
-      <Board positionStack={positionStack} setPositionStack={setPositionStack} />
-      <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
+      <div className="w-1/2">
+        <Board positionStack={positionStack} setPositionStack={setPositionStack} />
+      </div>
+      <div className="w-1/2">
+        <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
+      </div>
     </main>
   );
 }

@@ -11,7 +11,7 @@ type GameProps = {
 export default function Board({ positionStack, setPositionStack }: GameProps) {
 
   return (
-    <div className="w-2/3" >
+    <div className="px-10" >
       <Chessboard
         position={positionStack[positionStack.length - 1]}
         onPieceDrop={(sourceSquare, targetSquare, piece) => {

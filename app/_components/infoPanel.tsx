@@ -1,7 +1,9 @@
 "use client"
 
+import { useState } from "react";
 import Games from "./games";
 import ImportGames from "./importGames";
+import Players, { ImportedPlayer } from "./players";
 
 type InfoPanelProps = {
   positionStack: string[];
@@ -9,10 +11,15 @@ type InfoPanelProps = {
 };
 
 export default function InfoPanel({ positionStack, setPositionStack }: InfoPanelProps) {
+
+  const [colour, setColour] = useState<string>('white')
+  const [importedPlayers, setImportedPlayers] = useState<ImportedPlayer[]>([]);
+
   return (
     <div>
-      <ImportGames />
-      <Games positionStack={positionStack} setPositionStack={setPositionStack} />
+      <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
+      <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
+      <ImportGames importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers}/>
     </div>
   );
 }
