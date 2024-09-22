@@ -63,8 +63,19 @@ export default function Games({ positionStack, setPositionStack, colour, importe
           <div
             key={index}
             onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
-            className="border bg-gray-200 hover:bg-gray-400 text-center">
-            {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
+            className="bg-gray-500 g-gray-400 text-center relative w-full h-5 py-3 border-2 border-white hover:border-black hover:cursor-pointer"
+          >
+            <div
+              className="absolute top-1/2 transform -translate-y-1/2 bg-gray-300 h-full"
+              style={{ width: Math.floor(100 * (move.whiteWins + move.draws) / totalGames(move)) + "%" }}
+            />
+            <div
+              className="absolute top-1/2 transform -translate-y-1/2 bg-white h-full"
+              style={{ width: Math.floor(100 * move.whiteWins / totalGames(move)) + "%" }}
+            />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base">
+              {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
+            </div>
           </div>
         ))
       }

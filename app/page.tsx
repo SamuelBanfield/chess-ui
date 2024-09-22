@@ -31,7 +31,7 @@ export default function Home() {
       <div className="w-1/2">
         <Board positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
-      <div className="w-1/2">
+      <div className="w-1/3">
         <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
     </main>
