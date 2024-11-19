@@ -10,10 +10,15 @@ type InfoPanelProps = {
   setPositionStack: (positionStack: string[]) => void;
 };
 
+const initialPlayers: ImportedPlayer[] = [
+  {username: "samjban", site: "lichess", enabled: true},
+  {username: "Wertsy10", site: "chessdotcom", enabled: true},
+];
+
 export default function InfoPanel({ positionStack, setPositionStack }: InfoPanelProps) {
 
   const [colour, setColour] = useState<string>('white')
-  const [importedPlayers, setImportedPlayers] = useState<ImportedPlayer[]>([]);
+  const [importedPlayers, setImportedPlayers] = useState<ImportedPlayer[]>(initialPlayers);
 
   return (
     <div>
