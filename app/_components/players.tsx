@@ -17,7 +17,7 @@ export default function Players({ importedPlayers, setImportedPlayers, colour, s
 
   return (
     <div>
-      <select value={colour} onChange={(e) => setColour(e.target.value)}>
+      <select className="border-gray border-2" value={colour} onChange={(e) => setColour(e.target.value)}>
         <option value="white">White</option>
         <option value="black">Black</option>
       </select>

@@ -22,9 +22,9 @@ export default function InfoPanel({ positionStack, setPositionStack }: InfoPanel
 
   return (
     <div>
-      <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
-      <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
       <ImportGames importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers}/>
+      <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
+      <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
     </div>
   );
 }

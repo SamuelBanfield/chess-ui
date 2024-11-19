@@ -31,7 +31,7 @@ export default function ImportGames({ importedPlayers, setImportedPlayers }: Imp
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex border-gray border-2">
         <input type="text" value={importUser} placeholder='Username' onChange={(e) => setImportUser(e.target.value)} className="px-1 border-gray-300" />
         <select value={importType} onChange={(e) => setImportType(e.target.value)}>
           <option value="chessdotcom">Chess.com</option>

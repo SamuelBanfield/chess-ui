@@ -63,7 +63,7 @@ export default function Games({ positionStack, setPositionStack, colour, importe
           <div
             key={index}
             onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
-            className="bg-gray-500 g-gray-400 text-center relative w-full h-5 py-3 border-2 border-white hover:border-black hover:cursor-pointer"
+            className="bg-gray-500 g-gray-400 text-center relative w-full h-5 py-3 border-2 border-gray hover:border-black hover:cursor-pointer"
           >
             <div
               className="absolute top-1/2 transform -translate-y-1/2 bg-gray-300 h-full"
