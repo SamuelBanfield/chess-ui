@@ -15,6 +15,7 @@ export default function ImportGames({ importedPlayers, setImportedPlayers }: Imp
   const [errorText, setErrorText] = useState('');
 
   const importGames = async () => {
+    setErrorText('');
     try {
       const response = await fetch(`/api/import/${importType}/${importUser}`, {
         method: 'POST',
@@ -23,7 +24,6 @@ export default function ImportGames({ importedPlayers, setImportedPlayers }: Imp
         const data = await response.json();
         console.log("Import complete, total new games imported: " + data);
         setImportedPlayers([...importedPlayers, {username: importUser, site: importType, enabled: true}]);
-        setErrorText('');
       }
       else {
         setErrorText(response.status === 404 ? 'User not found' : 'Error importing games');
@@ -46,7 +46,7 @@ export default function ImportGames({ importedPlayers, setImportedPlayers }: Imp
         </select>
         <button onClick={importGames} className="px-2 bg-blue-500 text-white">Import</button>
       </div>
-      {(errorText !== '') && <p className="text-red-500 text-xs">{errorText}</p>}
+      <p className="text-red-500 text-xs">{errorText || '\u00A0'}</p>
     </div>
   );
 }
