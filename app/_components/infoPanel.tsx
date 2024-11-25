@@ -4,6 +4,7 @@ import { useState } from "react";
 import Games from "./games";
 import ImportGames from "./importGames";
 import Players, { ImportedPlayer } from "./players";
+import Note from "./note";
 
 type InfoPanelProps = {
   positionStack: string[];
@@ -25,6 +26,7 @@ export default function InfoPanel({ positionStack, setPositionStack }: InfoPanel
       <ImportGames importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers}/>
       <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
       <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
+      <Note positionStack={positionStack} />
     </div>
   );
 }

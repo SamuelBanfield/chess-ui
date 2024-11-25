@@ -27,7 +27,7 @@ export default function Home() {
   }, [positionStack]);
 
   return (
-    <main className="flex justify-center p-24">
+    <main className="flex justify-center pt-12">
       <div className="w-1/2">
         <Board positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
