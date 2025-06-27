@@ -3,6 +3,7 @@
 import { Chess } from "chess.js";
 import { useEffect, useState } from "react";
 import { ImportedPlayer } from "./players";
+import { FenWithMove } from "../page";
 
 type MoveWithFrequency = {
   move: {
@@ -15,8 +16,8 @@ type MoveWithFrequency = {
 };
 
 type GameProps = {
-  positionStack: string[];
-  setPositionStack: (positionStack: string[]) => void;
+  positionStack: FenWithMove[];
+  setPositionStack: (positionStack: FenWithMove[]) => void;
   colour: string;
   importedPlayers: ImportedPlayer[];
 };
@@ -33,7 +34,7 @@ export default function Games({ positionStack, setPositionStack, colour, importe
     const fetchData = async () => {
       try {
         const params = new URLSearchParams();
-        params.append('fen', positionStack[positionStack.length - 1]);
+        params.append('fen', positionStack[positionStack.length - 1].fen);
         params.append('colour', colour);
         params.append('sources', importedPlayers.filter((player) => player.enabled).map((player) => `${player.username}@${player.site}`).join(','));
         const url = `/api/game?${params.toString()}`;
@@ -62,7 +63,7 @@ export default function Games({ positionStack, setPositionStack, colour, importe
         .map((move: MoveWithFrequency, index: any) => (
           <div
             key={index}
-            onClick={() => setPositionStack([...positionStack, move.move.endingFEN])}
+            onClick={() => setPositionStack([...positionStack, {fen: move.move.endingFEN, move: move.move.move}])}
             className="bg-gray-500 g-gray-400 text-center relative w-full h-5 py-3 border-2 border-gray hover:border-black hover:cursor-pointer"
           >
             <div

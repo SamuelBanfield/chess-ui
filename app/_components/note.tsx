@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FenWithMove } from "../page";
 
 type NoteProps = {
-  positionStack: string[];
+  positionStack: FenWithMove[];
 };
 
 export default function Note(props: NoteProps) {
@@ -15,7 +16,7 @@ export default function Note(props: NoteProps) {
     const fetchData = async () => {
       try {
         const params = new URLSearchParams();
-        params.append('fen', positionStack[positionStack.length - 1]);
+        params.append('fen', positionStack[positionStack.length - 1].fen);
         const url = `/api/note?${params.toString()}`;
         
         const response = await fetch(url);
@@ -40,7 +41,7 @@ export default function Note(props: NoteProps) {
   const postNote = async (note: string) => {
     try {
       const params = new URLSearchParams();
-      params.append('fen', positionStack[positionStack.length - 1]);
+      params.append('fen', positionStack[positionStack.length - 1].fen);
       params.append('note', note);
       const url = `/api/note?${params.toString()}`;
       const response = await fetch(url, {

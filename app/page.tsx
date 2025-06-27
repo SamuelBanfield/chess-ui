@@ -3,12 +3,18 @@
 import Board from "./_components/board";
 import { useEffect, useState } from "react";
 import InfoPanel from "./_components/infoPanel";
+import Moves from "./_components/moves";
 
 const startingFEN : string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
+export type FenWithMove = {
+    fen: string;
+    move: string | null;
+  }
+
 export default function Home() {
 
-  const [positionStack, setPositionStack] = useState([startingFEN]);
+  const [positionStack, setPositionStack] = useState<FenWithMove[]>([{fen: startingFEN, move: null}]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -28,10 +34,13 @@ export default function Home() {
 
   return (
     <main className="flex justify-center pt-12">
+      <div className="w-1/6">
+        <Moves positionStack={positionStack} setPositionStack={setPositionStack} />
+      </div>
       <div className="w-1/2">
         <Board positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
-      <div className="">
+      <div className="w-1/4">
         <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
     </main>

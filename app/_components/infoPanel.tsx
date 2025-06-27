@@ -5,10 +5,11 @@ import Games from "./games";
 import ImportGames from "./importGames";
 import Players, { ImportedPlayer } from "./players";
 import Note from "./note";
+import { FenWithMove } from "../page";
 
 type InfoPanelProps = {
-  positionStack: string[];
-  setPositionStack: (positionStack: string[]) => void;
+  positionStack: FenWithMove[];
+  setPositionStack: (positionStack: FenWithMove[]) => void;
 };
 
 const initialPlayers: ImportedPlayer[] = [
