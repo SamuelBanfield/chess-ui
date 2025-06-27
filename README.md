@@ -1,6 +1,6 @@
 # Chess UI
 
-Welcome to the Chess UI project! This project is designed to provide an interface for checking results for opening by combining games from multiple accounts accross Lichess and Chess.com.
+This project is designed to provide an interface for checking results for openings by combining games from multiple accounts across Lichess and Chess.com.
 
 This expects a [backend server](https://github.com/SamuelBanfield/ChessAPI) to be running at `localhost:8080`, or as configured in `next.config.mjs`.
 
@@ -9,7 +9,6 @@ This expects a [backend server](https://github.com/SamuelBanfield/ChessAPI) to b
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contact](#contact)
-
 
 ## Features
 - Integration with both Lichess and Chess.com API for game import
