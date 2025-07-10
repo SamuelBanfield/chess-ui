@@ -12,28 +12,26 @@ type GameProps = {
 export default function Board({ positionStack, setPositionStack }: GameProps) {
 
   return (
-    <div className="px-10" >
-      <Chessboard
-        position={positionStack[positionStack.length - 1].fen}
-        onPieceDrop={(sourceSquare, targetSquare, piece) => {
-          console.log("Attempting to move", piece, "from", sourceSquare, "to", targetSquare, "p");
-          try {
-            const gameCopy = new Chess(positionStack[positionStack.length - 1].fen);
-            gameCopy.move({
-              from: sourceSquare,
-              to: targetSquare,
-              promotion: piece[1].toLowerCase()
-            });
-            setPositionStack([...positionStack, {fen: gameCopy.fen(), move: gameCopy.history().slice(-1)[0] || null}]);
-            return true;
-          }
-          catch (error) {
-            console.error("Illegal move");
-            return false;
-          }
-        }}
-      />
-    </div>
+    <Chessboard
+      position={positionStack[positionStack.length - 1].fen}
+      onPieceDrop={(sourceSquare, targetSquare, piece) => {
+        console.log("Attempting to move", piece, "from", sourceSquare, "to", targetSquare, "p");
+        try {
+          const gameCopy = new Chess(positionStack[positionStack.length - 1].fen);
+          gameCopy.move({
+            from: sourceSquare,
+            to: targetSquare,
+            promotion: piece[1].toLowerCase()
+          });
+          setPositionStack([...positionStack, {fen: gameCopy.fen(), move: gameCopy.history().slice(-1)[0] || null}]);
+          return true;
+        }
+        catch (error) {
+          console.error("Illegal move");
+          return false;
+        }
+      }}
+    />
   );
 
 }

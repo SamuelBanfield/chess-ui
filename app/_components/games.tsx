@@ -57,29 +57,39 @@ export default function Games({ positionStack, setPositionStack, colour, importe
   }, [positionStack, importedPlayers, colour]);
 
   return (
-    <div>
+    <div className="p-3 pt-0 bg-white rounded-b-lg shadow-lg flex flex-col">
+      <h2 className="text-sm font-semibold text-gray-700 mb-2">Games:</h2>
+      
+      <div className="flex-1 overflow-y-auto space-y-1 max-h-48">
       {gamesBar
-        ?.sort((a: MoveWithFrequency, b: MoveWithFrequency) => totalGames(b) - totalGames(a))
-        .map((move: MoveWithFrequency, index: any) => (
-          <div
-            key={index}
-            onClick={() => setPositionStack([...positionStack, {fen: move.move.endingFEN, move: move.move.move}])}
-            className="bg-gray-500 g-gray-400 text-center relative w-full h-5 py-3 border-2 border-gray hover:border-black hover:cursor-pointer"
-          >
-            <div
-              className="absolute top-1/2 transform -translate-y-1/2 bg-gray-300 h-full"
-              style={{ width: Math.floor(100 * (move.whiteWins + move.draws) / totalGames(move)) + "%" }}
-            />
-            <div
-              className="absolute top-1/2 transform -translate-y-1/2 bg-white h-full"
-              style={{ width: Math.floor(100 * move.whiteWins / totalGames(move)) + "%" }}
-            />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base">
-              {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
-            </div>
-          </div>
-        ))
+      ?.sort((a: MoveWithFrequency, b: MoveWithFrequency) => totalGames(b) - totalGames(a))
+      .map((move: MoveWithFrequency, index: any) => (
+      <div
+        key={index}
+        onClick={() => {
+        const newMove = {fen: move.move.endingFEN, move: move.move.move};
+        const lastMove = positionStack[positionStack.length - 1];
+        if (lastMove?.fen !== newMove.fen) {
+        setPositionStack([...positionStack, newMove]);
+        }
+        }}
+        className="relative w-full h-5 py-3 border border-gray-200 hover:border-gray-400 hover:cursor-pointer rounded-md bg-gray-500"
+      >
+        <div
+        className="absolute top-1/2 transform -translate-y-1/2 bg-gray-300 h-full rounded-md"
+        style={{ width: Math.floor(100 * (move.whiteWins + move.draws) / totalGames(move)) + "%" }}
+        />
+        <div
+        className="absolute top-1/2 transform -translate-y-1/2 bg-white h-full rounded-md"
+        style={{ width: Math.floor(100 * move.whiteWins / totalGames(move)) + "%" }}
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-sm text-gray-800">
+        {move.move.move + ", " + move.whiteWins + "/" + move.draws + "/" + move.blackWins}
+        </div>
+      </div>
+      ))
       }
+      </div>
     </div>
   );
 }

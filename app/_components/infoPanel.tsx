@@ -23,10 +23,12 @@ export default function InfoPanel({ positionStack, setPositionStack }: InfoPanel
   const [importedPlayers, setImportedPlayers] = useState<ImportedPlayer[]>(initialPlayers);
 
   return (
-    <div>
-      <ImportGames importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers}/>
-      <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
-      <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
+    <div className="h-[90vh] flex flex-col justify-between">
+      <div>
+        <ImportGames importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers}/>
+        <Players importedPlayers={importedPlayers} setImportedPlayers={setImportedPlayers} colour={colour} setColour={setColour} />
+        <Games positionStack={positionStack} setPositionStack={setPositionStack} colour={colour} importedPlayers={importedPlayers} />
+      </div>
       <Note positionStack={positionStack} />
     </div>
   );

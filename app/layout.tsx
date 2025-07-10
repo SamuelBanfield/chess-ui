@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="bg-gray-800 p-4 text-white">
-          <h1 className="text-xl font-bold">Chess Opening Explorer</h1>
-        </header>
-        {children}
+      <header className="bg-gray-800 h-[8vh] text-white flex items-center">
+        <h1 className="px-4 text-xl font-bold">Chess Opening Explorer</h1>
+      </header>
+      {children}
       </body>
     </html>
   );

@@ -61,9 +61,19 @@ export default function Note(props: NoteProps) {
   }
 
   return (
-    <div className="">
-      <textarea className="w-full border border-2 resize-none" value={note} onChange={(e) => setNote(e.target.value)} />
-      <button className="px-2 bg-blue-500 text-white" onClick={() => postNote(note)}>Save note</button>
+    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-3">
+      <textarea 
+        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2 resize-none" 
+        value={note} 
+        onChange={(e) => setNote(e.target.value)} 
+        placeholder="Add your note here..."
+      />
+      <button 
+        className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors duration-200 font-medium" 
+        onClick={() => postNote(note)}
+      >
+        Save note
+      </button>
     </div>
   );
 }

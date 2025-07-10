@@ -33,14 +33,14 @@ export default function Home() {
   }, [positionStack]);
 
   return (
-    <main className="flex justify-center pt-12">
-      <div className="w-1/6">
+    <main className="flex justify-center bg-gray-100">
+      <div className="w-1/4 h-full p-2">
         <Moves positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
-      <div className="w-1/2">
+      <div className="w-1/2 p-2">
         <Board positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
-      <div className="w-1/4">
+      <div className="w-1/4 p-2">
         <InfoPanel positionStack={positionStack} setPositionStack={setPositionStack} />
       </div>
     </main>
