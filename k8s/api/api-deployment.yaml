@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chess-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chess-api
+  template:
+    metadata:
+      labels:
+        app: chess-api
+    spec:
+      containers:
+        - name: chess-api
+          image: sambanfield/chess-api:latest
+          ports:
+            - containerPort: 8080
+          env: []  # Will be replaced by kustomization patch

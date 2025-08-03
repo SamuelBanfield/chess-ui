@@ -1,0 +1,71 @@
+resources:
+  - ui/ui-deployment.yaml
+  - ui/ui-service.yaml
+  - ui/ui-ingress.yaml
+  - api/api-deployment.yaml
+  - api/api-service.yaml
+  - api/api-ingress.yaml
+  - postgres/postgres-deployment.yaml
+  - postgres/postgres-service.yaml
+  - postgres/postgres-pvc.yaml
+  - postgres/postgres-pv.yaml
+
+# Database configuration - CHANGE THESE VALUES
+configMapGenerator:
+  - name: postgres-config
+    literals:
+      - POSTGRES_DB=chess
+
+secretGenerator:
+  - name: postgres-secret
+    literals:
+      - POSTGRES_USER=chessuser
+      - POSTGRES_PASSWORD=chesspass
+  - name: ui-config
+    literals:
+      - API_URL=http://chess-api:8080
+
+patches:
+  - target:
+      version: v1
+      kind: PersistentVolume
+      name: postgres-pv
+    patch: |-
+      - op: replace
+        path: /spec/hostPath/path
+        value: /run/desktop/mnt/host/c/Users/samue/git/chess-ui/postgres-data
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: chess-api
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres:5432/chess
+          - name: SPRING_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_USER
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: chess-ui
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: API_URL
+            valueFrom:
+              secretKeyRef:
+                name: ui-config
+                key: API_URL
